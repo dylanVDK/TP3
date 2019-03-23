@@ -34,6 +34,15 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class OffreFrag extends Fragment {
+    FragmentManager fm;
+
+    public FragmentManager getFm() {
+        return fm;
+    }
+
+    public void setFm(FragmentManager fm) {
+        this.fm = fm;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,7 +51,7 @@ public class OffreFrag extends Fragment {
         final View rootView = inflater.inflate(R.layout.liste_marques, container, false);
         final ListView marques = rootView.findViewById(R.id.list_marques);
         final ArrayList<String> responseData = new ArrayList<String>();
-
+        setFm(getChildFragmentManager());
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder urlBuilder = HttpUrl.parse("http://159.203.33.206/api/v1/brand").newBuilder();
         String url = urlBuilder.build().toString();
@@ -95,12 +104,11 @@ public class OffreFrag extends Fragment {
                 Object item = marques.getItemAtPosition(position);
                 Marques mrq = new Marques(item.toString(), position);
                 ModeleFrag mf = new ModeleFrag();
-                FragmentManager fm = getChildFragmentManager();
                 Bundle bundle = new Bundle();
 
                 bundle.putParcelable("mrq", mrq);
                 mf.setArguments(bundle);
-                FragmentTransaction ft = fm.beginTransaction().replace(R.id.constraintLayoutModele,mf);
+                FragmentTransaction ft = getFm().beginTransaction().add(R.id.constraintLayout,mf);
                 ft.addToBackStack(null).show(mf).commit();
                 Log.d("item clicked",item.toString());
             }
