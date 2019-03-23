@@ -143,14 +143,15 @@ public class LandingPage extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    AnnoncesFrag annonce = new AnnoncesFrag();
-                    return annonce;
+                    OffreFrag offre = new OffreFrag();
+                    return offre;
                 case 1:
                     VendreFrag vendre = new VendreFrag();
                     return vendre;
                 case 3:
-                    OffreFrag offre = new OffreFrag();
-                    return offre;
+                    AnnoncesFrag annonce = new AnnoncesFrag();
+                    return annonce;
+
 
             }
 
